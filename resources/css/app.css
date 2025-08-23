@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#searchBar:focus {
+    outline: none !important;
+    box-shadow: none !important; /* This is added to also remove focus rings that use box-shadow */
+}
