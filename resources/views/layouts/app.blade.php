@@ -34,6 +34,7 @@
     <main>
       {{ $slot }}
     </main>
+    <x-toast-notification />
   </div>
 </body>
 
