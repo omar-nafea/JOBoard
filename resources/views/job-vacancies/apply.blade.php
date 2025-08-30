@@ -23,6 +23,8 @@
               {{ $jobVacancy->type }}
             </span>
           </div>
+
+
         </div>
       </div>
       <form action="{{ route('job-vacancies.process-application', $jobVacancy->id) }}" method="POST"

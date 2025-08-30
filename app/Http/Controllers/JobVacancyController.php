@@ -8,6 +8,8 @@ use App\Models\JobApplication;
 use App\Models\JobVacancy;
 use App\Models\Resume;
 use Cloudinary\Cloudinary;
+use Spatie\PdfToText\Pdf;
+use Gemini; //
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
@@ -46,8 +48,11 @@ class JobVacancyController extends Controller
       // 2. Upload the file to a 'resumes' folder on Cloudinary
       $result = $cloudinary->uploadApi()->upload($file->getRealPath(), [
         'folder' => 'resumes',
-        'resource_type' => 'raw', // Important for non-image files like PDFs
+        'resource_type' => 'auto', // Use 'auto' instead of 'raw'
       ]);
+
+      // The upload result includes a 'format' key (e.g., "pdf"). We add it here.
+      $fileReference = 'v' . $result['version'] . '/' . $result['public_id'] . '.' . $result['format'];
 
       $extractedInfo = [
         'summary' => '',
@@ -59,7 +64,7 @@ class JobVacancyController extends Controller
       // 3. Create the Resume record in your database
       $resume = Resume::create([
         'filename' => $originalFileName,
-        'fileUrl' => $result['secure_url'], // IMPORTANT: Store the full Cloudinary URL
+        'fileUrl' => $fileReference, // IMPORTANT: Store the full Cloudinary URL
         'user_id' => auth()->id(),
         'contactDetails' => json_encode([
           'name' => auth()->user()->name,
