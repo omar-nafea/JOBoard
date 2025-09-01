@@ -13,7 +13,8 @@
       x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100">
       <h1 style="font-size: 10rem;" class=" sm:text-6xl md:text-8xl font-bold mb-6 tracking-tight">
         <span class="text-white">Find your</span><br />
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-rose-500 font-serif italic">Dream
+        <span
+          class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-rose-500 font-serif italic">Dream
           Job</span>
       </h1>
     </div>

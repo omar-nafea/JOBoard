@@ -33,7 +33,7 @@
                 </div>
                 <div class="mb-2">
                   <span class="text-white font-semibold">AI Score:</span>
-                  <span class="text-white">{{ $jobApplication->aiGeneratedScore ?? 'N/A' }}</span>
+                  <span class="text-white">{{ number_format($jobApplication->aiGeneratedScore, 1) ?? 'N/A' }}</span>
                 </div>
                 <div class="mb-2">
                   <span class="text-white font-semibold">AI Feedback:</span>

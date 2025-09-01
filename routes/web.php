@@ -6,11 +6,14 @@ use App\Http\Controllers\JobVacancyController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-  return view('welcome');
+// I want to show this if only is not authenticated
+Route::middleware(['guest'])->group(function () {
+  Route::get('/', function () {
+    return view('welcome');
+  });
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'verified', 'role:job_seeker'])->group(function () {
   Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
   Route::get('/job-vacancies/{id}', [JobVacancyController::class, 'show'])->name('job-vacancies.show');
   Route::get('/job-vacancies/{id}/apply', [JobVacancyController::class, 'apply'])->name('job-vacancies.apply');
